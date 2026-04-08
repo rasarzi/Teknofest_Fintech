@@ -2,45 +2,40 @@ import pandas as pd
 import json
 
 def build_features(input_file, output_file):
-    print(f"Loading {input_file} for P12 Feature Engineering...")
+    print(f"Loading {input_file} for P12 Feature Engineering (Expanded)...")
     
     with open(input_file, 'r') as f:
         data = json.load(f)
         
-    # Convert list of dicts back to a DataFrame and pivot for math operations
     df = pd.DataFrame(data)
     df = df.pivot(index='date', columns='indicator', values='value')
     df.index = pd.to_datetime(df.index)
     df = df.sort_index()
 
-    # --- THE DATA FIX ---
-    # Force all columns to be numeric. If it finds a '.', it turns it into NaN.
+    # Force numeric and fill gaps
     df = df.apply(pd.to_numeric, errors='coerce')
-    # Fill those new blanks with the last known valid number
     df = df.ffill().bfill()
-    # --------------------
 
-    # 1. Spreads (Yield Curve proxy: 10-Year Treasury minus Federal Funds Rate)
+    # 1. Spreads
     if 'yield_data' in df.columns and 'interest_rate' in df.columns:
         df['yield_spread'] = df['yield_data'] - df['interest_rate']
     
-    # 2. Trends (30-day moving averages)
-    for col in ['inflation', 'interest_rate', 'unemployment']:
-        if col in df.columns:
+    # 2. Dynamic Trends (Automatically calculates 30-day moving average for ALL indicators)
+    for col in df.columns:
+        if col != 'yield_spread':
             df[f'{col}_trend_30d'] = df[col].rolling(window=30).mean()
 
-    # 3. Directions (Current value minus value 30 days ago)
+    # 3. Directions
     if 'interest_rate' in df.columns:
         df['rate_direction'] = df['interest_rate'].diff(periods=30).apply(
             lambda x: "Rising" if x > 0 else ("Falling" if x < 0 else "Flat")
         )
-        
     if 'inflation' in df.columns:
         df['inflation_direction'] = df['inflation'].diff(periods=30).apply(
             lambda x: "Rising" if x > 0 else ("Falling" if x < 0 else "Flat")
         )
 
-    # 4. Regime Signals (Simple logic based on directions)
+    # 4. Regime Signals
     def determine_regime(row):
         rate = row.get('rate_direction', 'Flat')
         infl = row.get('inflation_direction', 'Flat')
@@ -51,10 +46,8 @@ def build_features(input_file, output_file):
 
     df['macro_regime'] = df.apply(determine_regime, axis=1)
 
-    # Clean up any NaN values created by the rolling/diff math
+    # Clean up NaNs and save
     df = df.bfill().ffill()
-
-    # Convert back to JSON dictionary format
     df.index = df.index.strftime('%Y-%m-%d')
     features_dict = df.to_dict(orient='index')
 

@@ -1,13 +1,15 @@
 {
     "analysis_date": "2026-02-01",
     "current_regime": "Transitional",
-    "llm_system_context": "As of 2026-02-01, the macroeconomic regime is classified as 'Transitional'. Inflation is currently Rising and interest rates are None. The yield spread is 0. Use this context to adjust risk models and asset allocation weightings.",
+    "llm_system_context": "As of 2026-02-01, the macroeconomic regime is classified as 'Transitional'. Inflation is currently Rising and interest rates are None. Broader Economic Context: The system now tracks 10 comprehensive metrics including GDP, M2 Money Supply, and Consumer Sentiment to provide deep liquidity and psychological context. Use this comprehensive dataset to adjust risk models and asset allocation weightings.",
     "raw_metrics_snapshot": {
         "inflation": 327.46,
         "interest_rates": 3.64,
         "treasury_yields": 4.13,
         "unemployment": 4.4,
         "inflation_trend_30d": 317.20376666666664,
+        "interest_rates_trend_30d": 4.695666666666666,
+        "treasury_yields_trend_30d": 4.268,
         "unemployment_trend_30d": 4.113333333333333,
         "inflation_direction": "Rising",
         "macro_regime": "Transitional"
