@@ -2,9 +2,7 @@ import requests
 import json
 
 def fetch_fred_data(series_id, api_key):
-    """
-    Fetches historical data for a specific series from the FRED API.
-    """
+    """Fetches historical observations for a given series from FRED API."""
     url = "https://api.stlouisfed.org/fred/series/observations"
     params = {
         "series_id": series_id,
@@ -14,48 +12,51 @@ def fetch_fred_data(series_id, api_key):
     
     try:
         response = requests.get(url, params=params)
-        # Raise an exception if the request was unsuccessful (e.g., 404, 401, 500)
         response.raise_for_status()
-        
         data = response.json()
-        # Extract just the date and value for a cleaner dictionary
         return {obs['date']: obs['value'] for obs in data['observations']}
-        
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching {series_id}: {e}")
-        return None
+    except Exception as err:
+        print(f"An error occurred for {series_id}: {err}")
+    return None
 
 def main():
-    # --- INSERT YOUR API KEY HERE ---
-    API_KEY = '8204151785387f51d47f6a0f1c2f4bce'
+    # --- ENTER YOUR FRED API KEY HERE ---
+    API_KEY = 'YOUR_API_KEY_HERE'  # Make sure to paste your real key back in!
     
-    # Common FRED Series IDs:
-    # CPIAUCSL = Inflation (CPI)
-    # FEDFUNDS = Interest Rates (Federal Funds Effective Rate)
-    # UNRATE   = Unemployment Rate
-    # GS10     = 10-Year Treasury Constant Maturity Rate
-    
+    # Expanded Macro Indicators for AI Agent
     macro_series = {
+        # Core Indicators (Original)
         "inflation": "CPIAUCSL",
-        "interest_rates": "FEDFUNDS",
+        "interest_rate": "FEDFUNDS",
         "unemployment": "UNRATE",
-        "treasury_yields": "GS10"
+        "yield_data": "GS10",
+        
+        # Advanced Indicators (New)
+        "gdp": "GDPC1",                 # Real Gross Domestic Product (Economic Health)
+        "m2_money_supply": "M2SL",      # M2 Money Supply (Market Liquidity)
+        "consumer_sentiment": "UMCSENT",# Univ. of Michigan Consumer Sentiment (Psychology)
+        "nonfarm_payrolls": "PAYEMS",   # Total Nonfarm Payrolls (Labor Market)
+        "retail_sales": "RSAFS",        # Retail Sales (Consumer Spending)
+        "housing_starts": "HOUST"       # Housing Starts (Real Estate health)
     }
     
-    final_macro_data = {}
+    raw_macro_data = {}
+    print("Starting Comprehensive Data Extraction for P8...")
+    
+    for label, series_id in macro_series.items():
+        print(f"Fetching {label} ({series_id})...")
+        series_data = fetch_fred_data(series_id, API_KEY)
+        
+        if series_data:
+            raw_macro_data[label] = series_data
+        else:
+            print(f"Skipping {label} due to error.")
 
-    for name, series_id in macro_series.items():
-        print(f"Fetching {name} data...")
-        data = fetch_fred_data(series_id, API_KEY)
-        if data:
-            final_macro_data[name] = data
-
-    # Save the structured dictionary to a JSON file
     output_filename = 'raw_macro.json'
     with open(output_filename, 'w') as f:
-        json.dump(final_macro_data, f, indent=4)
+        json.dump(raw_macro_data, f, indent=4)
 
-    print(f"\nSuccess! Data saved to {output_filename}")
+    print(f"\nTask P8 & P9 Complete. Expanded data saved to: {output_filename}")
 
 if __name__ == "__main__":
     main()
