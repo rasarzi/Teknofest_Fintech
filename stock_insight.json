@@ -1,0 +1,59 @@
+{
+    "AAPL": {
+        "analysis_date": "2026-04-01",
+        "llm_system_context": "As of 2026-04-01, AAPL is in a Bearish trend based on its 50-day SMA. The 14-day RSI is 47.89. Recent 20-day momentum is -3.13% with a current drawdown of -11.06% from its peak.",
+        "raw_metrics_snapshot": {
+            "ticker": "AAPL",
+            "date": "2026-04-01",
+            "open": 254.3000030517578,
+            "high": 256.17999267578125,
+            "low": 253.3300018310547,
+            "close": 254.2899932861328,
+            "volume": 10970278,
+            "sma_20": 253.56199951171874,
+            "sma_50": 260.10719421386716,
+            "volatility_20d": 4.409270924843676,
+            "momentum_20d": -0.031349977418711705,
+            "rsi_14": 47.8885340239319,
+            "drawdown": -0.11063300910108081
+        }
+    },
+    "MSFT": {
+        "analysis_date": "2026-04-01",
+        "llm_system_context": "As of 2026-04-01, MSFT is in a Bearish trend based on its 50-day SMA. The 14-day RSI is 28.47. Recent 20-day momentum is -8.34% with a current drawdown of -31.20% from its peak.",
+        "raw_metrics_snapshot": {
+            "ticker": "MSFT",
+            "date": "2026-04-01",
+            "open": 373.1600036621094,
+            "high": 373.989990234375,
+            "low": 368.20001220703125,
+            "close": 371.3900146484375,
+            "volume": 11180104,
+            "sma_20": 387.45899963378906,
+            "sma_50": 404.6714117431641,
+            "volatility_20d": 17.807346515876276,
+            "momentum_20d": -0.083440267867808,
+            "rsi_14": 28.472561809129303,
+            "drawdown": -0.3120180831086268
+        }
+    },
+    "SPY": {
+        "analysis_date": "2026-04-01",
+        "llm_system_context": "As of 2026-04-01, SPY is in a Bearish trend based on its 50-day SMA. The 14-day RSI is 46.06. Recent 20-day momentum is -3.88% with a current drawdown of -5.31% from its peak.",
+        "raw_metrics_snapshot": {
+            "ticker": "SPY",
+            "date": "2026-04-01",
+            "open": 653.9000244140625,
+            "high": 657.0700073242188,
+            "low": 653.0,
+            "close": 656.77001953125,
+            "volume": 35927092,
+            "sma_20": 659.3497039794922,
+            "sma_50": 675.5502197265625,
+            "volatility_20d": 13.263400963722288,
+            "momentum_20d": -0.03877558075560916,
+            "rsi_14": 46.06240359744285,
+            "drawdown": -0.05309395837141087
+        }
+    }
+}
