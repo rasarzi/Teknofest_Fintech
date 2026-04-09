@@ -21,7 +21,7 @@ def fetch_fred_data(series_id, api_key):
 
 def main():
     # --- ENTER YOUR FRED API KEY HERE ---
-    API_KEY = 'YOUR_API_KEY_HERE'  # Make sure to paste your real key back in!
+    API_KEY = '8204151785387f51d47f6a0f1c2f4bce'  # Make sure to paste your real key back in!
     
     # Expanded Macro Indicators for AI Agent
     macro_series = {
