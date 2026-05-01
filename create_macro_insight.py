@@ -25,30 +25,27 @@ def generate_llm_insight(input_file, output_file):
     print("Data filtered. Connecting to Gemini API...")
     
     # 3. Setup Gemini API Client 
-    # ---> PASTE YOUR ACTUAL GEMINI API KEY BELOW (Starts with AIza...) <---
     client = genai.Client(api_key="AIzaSyBYdmMC62oUTmHHJdOagec4E-5jmySGMzY")
     
-    # 4. Construct the heavily optimized prompt
+    # 4. The True Global Industrial & Strategy Prompt
     prompt = f"""
-    You are an expert macroeconomic analyst briefing a retail investor.
+    You are an expert financial AI Investment Assistant.
     
-    I am providing you with the last 5 years of US macroeconomic data covering 10 key indicators.
+    I am providing you with the last 5 years of macroeconomic data covering key industry-level indicators for the US, China, India, and the Eurozone.
     
-    Context Snapshot: As of {latest_date_str}, the macroeconomic regime is classified as '{current_data.get('macro_regime', 'Unknown')}'. 
-    Inflation direction: {current_data.get('inflation_direction', 'Unknown')}. 
-    Interest rate direction: {current_data.get('rate_direction', 'Unknown')}.
+    Context Snapshot: As of {latest_date_str}, the US macroeconomic regime is classified as '{current_data.get('macro_regime', 'Unknown')}'. 
     
     Task:
-    In 2 clear paragraphs, analyze the current US macroeconomic situation based on this data, assess the environment, and provide a high-level investment strategy.
+    Write a highly analytical, 2-paragraph investment briefing.
     
-    CRITICAL "ZERO JARGON" RULE:
-    1. You must clearly explain what a '{current_data.get('macro_regime', 'Unknown')}' regime actually means for the broader economy.
-    2. Every single time you mention an indicator (like M2, Housing Starts, or Yield Spreads) or an investment concept (like fixed income, cyclical equities, or real returns), you MUST briefly define what it means in simple, plain English right inside the sentence. Do not assume the reader knows any financial vocabulary.
+    Paragraph 1 (Global Industrial Assessment): Explicitly state that your analysis is based on the trends from the last five years of global data. Analyze the industrial output, manufacturing health, and supply chain dynamics of the US, China, India, and the Eurozone simultaneously. You MUST use the specific, direct data provided for each of these respective regions to assess the global industrial landscape as a whole, treating each region as a primary data point rather than just a reaction to the US.
+    
+    Paragraph 2 (Comprehensive Investment Strategy): Detail a specific, actionable investment strategy based on this global assessment. Your strategy MUST explicitly cover asset allocation or sector recommendations across these four markets. Explain how an investor should position themselves to capitalize on the distinct economic realities of the US, China, India, and the Eurozone.
     
     Constraints:
-    - Base your analysis purely on the provided fundamental data.
-    - Integrate definitions naturally into the flow of your writing. Do not just make a list.
-    - Do not use em-dashes (—), hyphens, or complex special punctuation. Keep sentences simple and use standard commas or parentheses instead.
+    - Do NOT define any macroeconomic terms.
+    - Keep the tone highly professional and suitable for an institutional investor.
+    - You MUST explicitly mention and analyze the US, China, India, and the Eurozone in BOTH paragraphs based on their actual provided data.
     
     Data (Last 5 Years):
     {json.dumps(five_year_data, indent=2)}
@@ -66,7 +63,7 @@ def generate_llm_insight(input_file, output_file):
         print(f"Error calling Gemini API: {e}")
         ai_analysis_text = "Failed to generate AI insight."
 
-    # 6. Save the final payload (ensure_ascii=False fixes the \u2014 issue)
+    # 6. Save the final payload 
     insight_payload = {
         "analysis_date": latest_date_str,
         "ai_generated_analysis": ai_analysis_text,
