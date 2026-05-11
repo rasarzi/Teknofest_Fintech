@@ -1,30 +1,4 @@
 {
     "analysis_date": "2026-03-01",
-    "ai_generated_analysis": "Based on the trends from the last five years of global data, the industrial landscape is currently defined by the US economy’s shift into a \"Transitional\" regime, characterized by a GDP plateauing at $24.06 trillion and a pivot to \"Falling\" interest rates (3.64%). This US consumption resilience, evidenced by retail sales reaching $738.3 billion in March 2026, has provided a critical floor for Chinese industrial output, though Chinese manufacturing health faces persistent headwinds from a global \"Rising\" inflation direction (CPI climbing from 266.61 to 327.46 over the period). Simultaneously, India has emerged as a primary data point of growth, leveraging the expansion of global M2 money supply—which reached $22.66 trillion—to accelerate its manufacturing health and decouple from the Eurozone’s more fragile industrial state. The Eurozone remains the most vulnerable of the four, as its supply chain dynamics are heavily pressured by the volatility in yield spreads (rising to 0.61) and a sluggish response to the inflationary trends that have seen global price levels surge by over 22% in the last 60 months.\n\nThe recommended investment strategy focuses on a multi-asset allocation that capitalizes on the US \"Transitional\" phase while capturing high-velocity growth in India and defensive positioning in the Eurozone and China. Investors should overweight US interest-rate-sensitive sectors, specifically Real Estate and Utilities, to benefit from the current \"Falling\" rate direction and the stabilization of housing starts at 1,487 units. In India, a heavy sector rotation into Industrials and Infrastructure is warranted to capture the structural expansion funded by the five-year surge in global liquidity. For China, the strategy should narrow to large-cap exporters that directly service the sustained US retail demand, effectively hedging against domestic margin compression caused by rising input costs. Finally, within the Eurozone, a shift toward high-quality corporate credit is essential to capture yield premiums while the region navigates the yield spread normalization. This comprehensive positioning balances the high-growth industrial output of India and China against the stabilizing, yet inflationary, consumption-heavy realities of the US and the Eurozone.",
-    "raw_metrics_snapshot": {
-        "consumer_sentiment": 56.6,
-        "gdp": 24065.956,
-        "housing_starts": 1487.0,
-        "inflation": 327.46,
-        "interest_rate": 3.64,
-        "m2_money_supply": 22667.3,
-        "nonfarm_payrolls": 158637,
-        "retail_sales": 738366.0,
-        "unemployment": 4.3,
-        "yield_data": 4.25,
-        "yield_spread": 0.6099999999999999,
-        "consumer_sentiment_trend_30d": 64.19666666666666,
-        "gdp_trend_30d": 23594.5451,
-        "housing_starts_trend_30d": 1386.6,
-        "inflation_trend_30d": 317.87656666666663,
-        "interest_rate_trend_30d": 4.639333333333334,
-        "m2_money_supply_trend_30d": 21576.010000000002,
-        "nonfarm_payrolls_trend_30d": 157980.56666666668,
-        "retail_sales_trend_30d": 710992.0333333333,
-        "unemployment_trend_30d": 4.133333333333334,
-        "yield_data_trend_30d": 4.2636666666666665,
-        "rate_direction": "Falling",
-        "inflation_direction": "Rising",
-        "macro_regime": "Transitional"
-    }
+    "ai_generated_analysis": "To assess the global economy, we are focusing on exactly two indicators: Inflation and Stock Market Performance, using the United States as our baseline. In the United States, inflation has finally leveled out while the stock market continues to climb, meaning investors are seeing real, positive growth. Europe is in a weaker position; their inflation remains uncomfortably high, but their stock market has remained relatively flat, making it hard for investors there to keep up. India is currently the strongest performer, with a skyrocketing stock market that is easily outpacing its slightly higher inflation rate. Meanwhile, China is experiencing the opposite problem: they are dealing with falling prices, but their stock market continues to struggle and lose value as consumer confidence remains low.\n\nBased on these trends, investors should put the largest portion of their money into India and the United States, as both regions offer strong stock market growth that easily beats inflation. You should keep a much smaller, cautious amount invested in Europe, sticking only to highly reliable companies that can survive a flat market. Finally, you should avoid investing in China for now, keeping your money out of that region until their stock market shows clear signs of recovering from their current economic downturn."
 }

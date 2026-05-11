@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from google import genai
+from google.genai import types
 
 def generate_llm_insight(input_file, output_file):
     print(f"Loading {input_file} for P13 AI Agent Integration...")
@@ -27,35 +28,34 @@ def generate_llm_insight(input_file, output_file):
     # 3. Setup Gemini API Client 
     client = genai.Client(api_key="AIzaSyBYdmMC62oUTmHHJdOagec4E-5jmySGMzY")
     
-    # 4. The True Global Industrial & Strategy Prompt
+    # 4. The Strict Template Prompt
     prompt = f"""
     You are an expert financial AI Investment Assistant.
     
-    I am providing you with the last 5 years of macroeconomic data covering key industry-level indicators for the US, China, India, and the Eurozone.
-    
-    Context Snapshot: As of {latest_date_str}, the US macroeconomic regime is classified as '{current_data.get('macro_regime', 'Unknown')}'. 
-    
     Task:
-    Write a highly analytical, 2-paragraph investment briefing.
+    Write an executive investment briefing based on the provided macroeconomic data.
     
-    Paragraph 1 (Global Industrial Assessment): Explicitly state that your analysis is based on the trends from the last five years of global data. Analyze the industrial output, manufacturing health, and supply chain dynamics of the US, China, India, and the Eurozone simultaneously. You MUST use the specific, direct data provided for each of these respective regions to assess the global industrial landscape as a whole, treating each region as a primary data point rather than just a reaction to the US.
+    CRITICAL CONSTRAINT - STRICT TEMPLATE MATCHING:
+    You must output your analysis to match the exact tone, phrasing, and structure of the Template below. You are forbidden from adding Wall Street jargon. Keep it exactly to these two paragraphs.
     
-    Paragraph 2 (Comprehensive Investment Strategy): Detail a specific, actionable investment strategy based on this global assessment. Your strategy MUST explicitly cover asset allocation or sector recommendations across these four markets. Explain how an investor should position themselves to capitalize on the distinct economic realities of the US, China, India, and the Eurozone.
-    
-    Constraints:
-    - Do NOT define any macroeconomic terms.
-    - Keep the tone highly professional and suitable for an institutional investor.
-    - You MUST explicitly mention and analyze the US, China, India, and the Eurozone in BOTH paragraphs based on their actual provided data.
+    [START TEMPLATE]
+    To assess the global economy, we are focusing on exactly two indicators: Inflation and Stock Market Performance, using the United States as our baseline. In the United States, inflation has finally leveled out while the stock market continues to climb, meaning investors are seeing real, positive growth. Europe is in a weaker position; their inflation remains uncomfortably high, but their stock market has remained relatively flat, making it hard for investors there to keep up. India is currently the strongest performer, with a skyrocketing stock market that is easily outpacing its slightly higher inflation rate. Meanwhile, China is experiencing the opposite problem: they are dealing with falling prices, but their stock market continues to struggle and lose value as consumer confidence remains low.
+
+    Based on these trends, investors should put the largest portion of their money into India and the United States, as both regions offer strong stock market growth that easily beats inflation. You should keep a much smaller, cautious amount invested in Europe, sticking only to highly reliable companies that can survive a flat market. Finally, you should avoid investing in China for now, keeping your money out of that region until their stock market shows clear signs of recovering from their current economic downturn.
+    [END TEMPLATE]
     
     Data (Last 5 Years):
     {json.dumps(five_year_data, indent=2)}
     """
     
-    # 5. Call the Gemini API
+    # 5. Call the Gemini API with Temperature = 0.0 (Zero Creativity)
     try:
         response = client.models.generate_content(
             model="gemini-3-flash-preview", 
-            contents=prompt
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.0, 
+            )
         )
         ai_analysis_text = response.text
         print("\nGemini Analysis Generated Successfully!\n")
@@ -66,8 +66,7 @@ def generate_llm_insight(input_file, output_file):
     # 6. Save the final payload 
     insight_payload = {
         "analysis_date": latest_date_str,
-        "ai_generated_analysis": ai_analysis_text,
-        "raw_metrics_snapshot": current_data
+        "ai_generated_analysis": ai_analysis_text
     }
     
     with open(output_file, 'w') as f:

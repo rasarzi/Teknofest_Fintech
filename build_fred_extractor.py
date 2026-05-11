@@ -22,30 +22,38 @@ def fetch_fred_data(series_id, api_key):
 def main():
     API_KEY = '8204151785387f51d47f6a0f1c2f4bce'  
     
-    # Expanded Macro Indicators for AI Agent
     macro_series = {
-        # Core Indicators (Original)
-        "inflation": "CPIAUCSL",
-        "interest_rate": "FEDFUNDS",
-        "unemployment": "UNRATE",
-        "yield_data": "GS10",
+        # US Baseline Indicators
+        "us_inflation": "CPIAUCSL",
+        "us_interest_rate": "FEDFUNDS",
+        "us_unemployment": "UNRATE",
+        "us_yield_data": "GS10",
+        "us_gdp": "GDPC1",
+        "us_m2_money_supply": "M2SL",
+        "us_consumer_sentiment": "UMCSENT",
+        "us_nonfarm_payrolls": "PAYEMS",
+        "us_retail_sales": "RSAFS",
+        "us_housing_starts": "HOUST",
+        "us_stock_market": "SP500", 
         
-        # Advanced Indicators (New)
-        "gdp": "GDPC1",                 # Real Gross Domestic Product (Economic Health)
-        "m2_money_supply": "M2SL",      # M2 Money Supply (Market Liquidity)
-        "consumer_sentiment": "UMCSENT",# Univ. of Michigan Consumer Sentiment (Psychology)
-        "nonfarm_payrolls": "PAYEMS",   # Total Nonfarm Payrolls (Labor Market)
-        "retail_sales": "RSAFS",        # Retail Sales (Consumer Spending)
-        "housing_starts": "HOUST",      # Housing Starts (Real Estate health)
+        # China Equivalent Indicators
+        "china_inflation": "CHNCPIALLMINMEI", 
+        "china_interest_rate": "INTDSRCNM193N", 
+        "china_stock_market": "SPASTT01CNM661N", 
         
-        # Global Indicators (For International Context)
-        "china_inflation": "CHNCPIALLMINMEI", # China CPI
-        "india_inflation": "INDCPIALLMINMEI", # India CPI
-        "eurozone_rate": "IR3TIB01EZM156N"    # Eurozone 3-Month Interbank Rate
+        # India Equivalent Indicators
+        "india_inflation": "INDCPIALLMINMEI", 
+        "india_interest_rate": "INTDSRINM193N", 
+        "india_stock_market": "SPASTT01INM661N", 
+        
+        # Eurozone Equivalent Indicators
+        "eurozone_inflation": "CP0000EZ19M086NES", 
+        "eurozone_interest_rate": "IR3TIB01EZM156N", 
+        "eurozone_stock_market": "SPASTT01EZM661N" 
     }
     
     raw_macro_data = {}
-    print("Starting Comprehensive & Global Data Extraction for P8...")
+    print("Starting Global Comparison & Stock Market Extraction...")
     
     for label, series_id in macro_series.items():
         print(f"Fetching {label} ({series_id})...")
@@ -60,7 +68,7 @@ def main():
     with open(output_filename, 'w') as f:
         json.dump(raw_macro_data, f, indent=4)
 
-    print(f"\nTask P8 & P9 Complete. Expanded global data saved to: {output_filename}")
+    print(f"\nExtraction Complete! Global comparison data saved to: {output_filename}")
 
 if __name__ == "__main__":
     main()
