@@ -1,0 +1,23 @@
+# Local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+
+# Generated datasets and model output
+raw_*.json
+clean_*.json
+structured_*.json
+*_features.json
+*_insight.json
